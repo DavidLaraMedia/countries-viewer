@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  font-size: 1.2em;
+  color: white;
+  background-color: #422d2d;
+  padding: 1em 0;
+  margin: 0;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.headerTitle {
+  font-size: 1.5em;
+  margin: 0;
+  font-family: Liberation Mono, Courier, monospace;
+}
+

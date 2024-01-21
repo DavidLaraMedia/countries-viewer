@@ -1,0 +1,48 @@
+.footer {
+  width: 100%;
+  color: white;
+  background-color: #422d2d;
+  padding: 1.2em 0;
+  font-family: Liberation Mono, Courier, monospace;
+
+  a {
+    color: inherit;
+  }
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 0.4em;
+
+  @media (max-width: 720px) {
+    flex-wrap: wrap;
+  }
+}
+
+.footerLinks {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 2em;
+
+  @media (max-width: 720px) {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+  }
+}
+
