@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 import Layout from "@/components/Layout";
 import Section from "@/components/Section";
 import Container from "@/components/Container";
@@ -10,45 +8,35 @@ import styles from "@/styles/Home.module.scss";
 import countriesData from "@/data/countries.json";
 import { fetchCountryInfo } from "@/services/graphql";
 
+interface AdditionalInfo {
+  capital?: string;
+  continent?: {
+    name?: string;
+  };
+  currency?: string;
+  emoji?: string;
+  phone?: string;
+}
+
 interface Country {
   Country: string;
   "ISO Code": string;
   Latitude: number;
   Longitude: number;
-  additionalInfo?: {
-    capital?: string;
-    continent?: {
-      name?: string;
-    };
-    currency?: string;
-    emoji?: string;
-    phone?: string;
-  };
+  additionalInfo?: AdditionalInfo;
 }
 
-const DEFAULT_CENTER: [number, number] = [38.907132, -77.036546];
+export default function Home({updatedCountries}: Readonly<{updatedCountries: []}>): JSX.Element {
+  const countries: Country[] = updatedCountries;
+  if (!countries.length) {
+    return (
+      <Section>
+          <h3 className={styles.title}>Something went wrong, please reload the page...</h3>
+      </Section>
+    ) 
+  }
 
-export default function Home(): JSX.Element {
-  const [countries, setCountries] = useState<Country[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const updatedCountries: any = await Promise.all(
-        countriesData.map(async (country) => {
-          const additionalInfo = await fetchCountryInfo(country["ISO Code"]);
-          return { ...country, additionalInfo };
-        })
-      );
-      setCountries(updatedCountries);
-    };
-
-    fetchData();
-  }, []);
-
-  const mapCenter: [number, number] =
-    countries.length > 0
-      ? [countries[0].Latitude, countries[0].Longitude]
-      : DEFAULT_CENTER;
+  const mapCenter: [number, number] = [countries[0].Latitude, countries[0].Longitude]
 
   return (
     <Layout>
@@ -70,7 +58,6 @@ export default function Home(): JSX.Element {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
                 />
 
-                {/* Render markers for each country */}
                 {countries.map((country, index) => (
                   <Marker
                     key={index}
@@ -89,6 +76,7 @@ export default function Home(): JSX.Element {
                     </Popup>
                   </Marker>
                 ))}
+                
               </>
             )}
           </Map>
@@ -96,4 +84,23 @@ export default function Home(): JSX.Element {
       </Section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const updatedCountries: any = await Promise.all(
+      countriesData.map(async (country) => {
+        const additionalInfo = await fetchCountryInfo(country["ISO Code"]);
+        return { ...country, additionalInfo };
+      })
+    );
+    return {
+      props: {
+        updatedCountries
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    throw new Error(String(error))
+  }
 }

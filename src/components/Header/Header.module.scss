@@ -1,15 +1,14 @@
 .header {
   width: 100%;
-  font-size: 1.2em;
-  color: white;
-  background-color: #422d2d;
+  color: rgb(59, 59, 59);
+  background-color: #9292926a;
   padding: 1em 0;
   margin: 0;
 }
 
 .headerContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
@@ -18,5 +17,9 @@
   font-size: 1.5em;
   margin: 0;
   font-family: Liberation Mono, Courier, monospace;
+  text-align: center;
+  @media (max-width: 720px) {
+    font-size: 1em;
+  }
 }
 

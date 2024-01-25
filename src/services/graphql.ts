@@ -1,4 +1,3 @@
-// graphql.ts
 import { request, gql } from "graphql-request";
 
 const API_ENDPOINT = "https://countries.trevorblades.com/";

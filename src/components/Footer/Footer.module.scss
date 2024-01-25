@@ -1,12 +1,17 @@
 .footer {
   width: 100%;
-  color: white;
-  background-color: #422d2d;
   padding: 1.2em 0;
   font-family: Liberation Mono, Courier, monospace;
+  color: #646464;
+  background-color: #9292926a;
+
+  p {
+    margin: 0px;
+  }
 
   a {
     color: inherit;
+    margin: 5px 0px 0px 15px;
   }
 }
 
@@ -15,7 +20,7 @@
   justify-content: space-between;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 0.4em;
 
   @media (max-width: 720px) {
@@ -27,7 +32,7 @@
   display: flex;
   list-style: none;
   padding: 0;
-  margin: 0 2em;
+
 
   @media (max-width: 720px) {
     width: 100%;
